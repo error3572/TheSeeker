@@ -2,3 +2,7 @@ pygeoip
 time
 ipwhois
 datetime
+socket
+python-nmap
+sys
+wget

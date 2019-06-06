@@ -4,6 +4,10 @@ import time as time
 import socket as connect
 from ipwhois import IPWhois as whois
 from datetime import datetime 
+import nmap
+import sys
+import wget
+import socket
 class bcolors:
     
     NC='\033[0m' # No Color, reset all
@@ -55,10 +59,32 @@ def banner():
     | |  | '_ \ / _ \ / __|/ _ \/ _ \ |/ / _ \ '__|
     | |  | | | |  __/ \__ \  __/  __/   <  __/ |
     |_|  |_| |_|\___| |___/\___|\___|_|\_\___|_|
-       
-       Coded by: Err0r
 ''')
+    print(bcolors.LightRed+bcolors.Blink+'       Coded by: Err0r'+bcolors.NC)
 banner()
+def domaintoip():
+    target=input('Enter the domain of the target::>')
+    dti=socket.gethostbyname(target)
+    print(bcolors.LightYellow+'['+bcolors.Green+'+'+bcolors.LightYellow+']'+bcolors.Cyan+' '+'Ip found!:::'+bcolors.Underlined+dti+bcolors.NC)
+def robots():
+    url1=input(bcolors.Green+"Enter target's domain name::>")
+    url=url1+'robots.txt'
+    print(bcolors.Blue+bcolors.BckgrWhite)
+    robots = wget.download(url)
+    print(bcolors.NC)
+def portscan():
+     
+    target=input('Enter the target::>')
+    portr=input('enter the port range::>')
+    smode=input('Would you like to switch to stealth mode?(y,n)')
+    print (bcolors.Yellow+"Executing a port scan"+bcolors.White)  
+    nmscan=nmap.PortScanner()
+    if smode=='y':
+        nmscan.scan(target,portr,'-A -sS -Pn -v')
+    else:
+        nmscan.scan(target,portr,'-A -sS -v')
+    print(nmscan.scaninfo())
+    
 def geol():
     target=input('Enter the target::>')
     print (bcolors.Yellow+"Trying to locate the target"+bcolors.White)
@@ -88,13 +114,26 @@ def choose():
     print (bcolors.Green+'''
     1.geolocation
     2.Whois by ip lookup(a little buggy)
+    3.Robots.txt downloader
+    4.Domain name to ip
     ''')
     choice=input('What option would you like to use?::>')
-    if choice=="1": 
-        geol()
+    if choice=="1":
+        try:
+            geol()
+        except Exception as e:
+            print(bcolors.Red+f'ERROR: {e}')        
     if choice=="2":
-        whoisinfo()
+        try:
+            whoisinfo()
+        except Exception as e:
+            print(bcolors.Red+f'ERROR: {e}')
+    if choice=='3':
+        robots()
+    if choice== '4':
+        domaintoip()
     
+        
     
 
     
