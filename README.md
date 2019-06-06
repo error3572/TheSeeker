@@ -1,6 +1,5 @@
 # TheSeeker
-![Alt text](/pic1.png?raw=true "pic1")
-![Alt text](/pic2.png?raw=true "pic2")
+![Alt text](/pic1.png?raw=true "pic3")
 The Seeker is an information gathering toolkit which can help you discover information about a website,open ports etc.
 
 #  Status 
